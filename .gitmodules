@@ -1,0 +1,8 @@
+[submodule "eigen"]
+	path = vendor/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+	shallow = true
+[submodule "spectra"]
+	path = vendor/spectra
+	url = https://github.com/yixuan/spectra.git
+	shallow = true

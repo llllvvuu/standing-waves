@@ -1,0 +1,8 @@
+.cache/
+Debug/
+Release/
+Debug-WASM/
+Release-WASM/
+node_modules/
+compile_commands.json
+.clangd

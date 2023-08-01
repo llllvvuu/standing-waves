@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Standing Waves Visualization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <style>
+    html,
+    body,
+    main {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    main {
+      background-color: #000;
+      color: #FFF;
+      display: flex;
+    }
+
+    hr {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      opacity: 1;
+    }
+
+    canvas {
+      min-height: 0;
+      min-width: 0;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    #sidebar {
+      display: none;
+      height: 100%;
+      min-width: max(300px, 20vw);
+      max-width: max(300px, 20vw);
+      overflow-y: auto;
+      background-color: #333;
+      z-index: 10;
+    }
+
+    @media (max-width: 640px) {
+      #sidebar {
+        min-width: 100vw;
+        max-width: 100vh;
+      }
+    }
+
+    #sidebar .section,
+    #slowdownSection {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    #canvas-container {
+      flex: 1;
+      min-height: 0;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #sidebar-collapse {
+      position: fixed;
+      right: 16px;
+      top: 16px;
+      z-index: 999;
+    }
+
+    #github {
+      position: fixed;
+      color: #88F;
+      right: 16px;
+      bottom: 16px;
+      z-index: 1;
+    }
+
+    #github:hover {
+      color: #CCF;
+    }
+
+    #reset-weights {
+      width: 100%;
+    }
+
+    .tip {
+      background-color: #004488;
+      border-left: 10px solid #0077BB;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="sidebar-collapse">Open Options</button>
+  <a id="github" href="https://github.com/llllvvuu/standing-waves" target="_blank">GitHub</a>
+  <main>
+    <div id="sidebar">
+      <div id="slowdownSection">
+        <label for="tiling">Tiling:</label>
+        <select name="tiling" id="tiling">
+          <option value="hex">Hexagonal</option>
+          <option value="rect">Rectangular</option>
+        </select>
+        <label for="pointStyle">Point Style:</label>
+        <select name="pointStyle" id="pointStyle">
+          <option value="morphSize">Morph Size</option>
+          <option value="upAndDown">Up and Down</option>
+          <option value="viridis">Viridis</option>
+        </select>
+        <div>Number of standing waves: <span id="nEigenvectors">Loading...</span></div>
+        <label>Slowdown (1x-10000x):</label>
+        <input id="slowdown" type="number" min="1" max="10000" step="1" value="200">
+      </div>
+      <hr />
+
+      <div class="tip">
+        &#128161; You can browse standing waves by clicking the up and down arrows in the active input box.
+      </div>
+      <div class="tip">
+        &#128161; On the rectangular grid, you can click to approximate a ripple using only 40 standing waves (it works better in the corners).
+      </div>
+      <div id="eigenvectorCoefficients">
+        <div class="section"><button id="reset-weights">Reset All Weights</button></div>
+        <hr />
+        <!-- sections will be dynamically added here -->
+      </div>
+    </div>
+    <div id="canvas-container">
+      <div id="loading">Loading JavaScript module...</div>
+      <!-- canvas will be dynamically added here -->
+    </div>
+    <script src="dist/index.js"></script>
+  </main>
+</body>
+
+</html>
